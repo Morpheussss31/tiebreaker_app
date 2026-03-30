@@ -1,7 +1,5 @@
 import 'dart:ui';
 import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +25,6 @@ class TiebreakerApp extends StatelessWidget {
   }
 }
 
-// --- Data Model ---
 class AIAnalysisResult {
   final List<String> entities;
   final Map<String, List<String>> pros;
@@ -60,12 +57,11 @@ class AIAnalysisResult {
   );
 }
 
-// --- AI Service ---
 class AIAnalysisService {
   static const String _apiKey = 'AIzaSyCVdB-Qe7ME5jhStV_xngVfcvXGJtPVptw';
 
   static Future<AIAnalysisResult> analyzeWithGemini(String scenario) async {
-    final model = GenerativeModel(model: 'gemini-2.5-flash', apiKey: _apiKey);
+    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: _apiKey);
 
     final prompt = """
     Scenario: $scenario
@@ -151,7 +147,6 @@ class AIAnalysisService {
   }
 }
 
-// --- Home Screen ---
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -231,7 +226,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// --- Result Screen ---
 class ResultScreen extends StatefulWidget {
   final AIAnalysisResult result;
   const ResultScreen({super.key, required this.result});
@@ -456,7 +450,6 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 }
 
-// --- History Screen ---
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
@@ -504,7 +497,6 @@ class HistoryScreen extends StatelessWidget {
   }
 }
 
-// --- UI HELPERS ---
 class GlassContainer extends StatelessWidget {
   final Widget child;
   const GlassContainer({super.key, required this.child});
